@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>VERITAS — Institutional Transaction & Control Platform</title>
+<style>
+:root{
+  --navy:#10243b;--navy2:#183b5b;--blue:#2b6ea6;--blue2:#dbeaf7;
+  --steel:#d5d9dd;--silver:#eef0f2;--line:#9aa5ae;--dark:#17202a;
+  --green:#19733a;--red:#9c2424;--amber:#8a5b00;--paper:#f5f5f2;
+  --shadow:2px 2px 0 rgba(0,0,0,.18);
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:Tahoma,Arial,sans-serif;background:#c7ccd1;color:#20252a;font-size:12px}
+body{background:
+ linear-gradient(#e8eaec 0 1px,transparent 1px) 0 0/100% 3px,
+ #c7ccd1;
+}
+a{color:#064f8d}
+button{font:11px Tahoma,Arial,sans-serif}
+.shell{width:min(1220px,calc(100% - 18px));margin:10px auto 22px;border:1px solid #39434c;background:#dfe2e5;box-shadow:5px 5px 0 rgba(0,0,0,.16)}
+.titlebar{height:29px;background:linear-gradient(#2b5c86,#123252);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 7px;font-weight:bold}
+.brand{display:flex;gap:9px;align-items:center}.brandmark{width:18px;height:18px;border:1px solid #d9e8f4;background:#f2f4f5;color:#153b5e;text-align:center;line-height:17px;font-weight:bold}
+.window-buttons{display:flex;gap:3px}.wb{width:20px;height:18px;background:#dce1e5;color:#132b42;border:1px solid #071a2a;text-align:center;line-height:15px;font-weight:bold}
+.menubar{height:25px;background:#eceeef;border-bottom:1px solid #8c959c;padding:4px 8px}.menubar span{margin-right:24px}
+.nav{display:flex;flex-wrap:wrap;background:#d8dde1;border-bottom:1px solid #929ba2;padding:4px 6px;gap:4px}
+.nav a{padding:4px 8px;text-decoration:none;color:#1e2e3b;border:1px solid transparent}.nav a:hover{border-color:#8e9aa4;background:#edf1f4}.nav a.active{border:1px solid #7d8993;background:#fff;font-weight:bold}
+.hero{padding:20px 22px 17px;background:#f7f7f5;border-bottom:1px solid #8e969d}
+.hero-grid{display:grid;grid-template-columns:1fr 320px;gap:22px}
+.kicker{font-size:11px;color:#40596f;font-weight:bold;letter-spacing:.6px;text-transform:uppercase}
+h1{font-size:28px;margin:5px 0 6px;color:#122b43}.subtitle{font-size:14px;line-height:1.5;max-width:800px;color:#38424a}
+.notice{border:1px solid #9a7b36;background:#fff9df;padding:9px;margin-top:12px;line-height:1.45}
+.downloadbox{border:1px solid #737e87;background:#e7eaec;padding:10px;box-shadow:var(--shadow)}
+.downloadbox h2{font-size:13px;margin:0 0 8px;color:#1a3044}
+.download{display:block;width:100%;padding:10px 8px;border:1px solid #153b5e;border-radius:2px;background:linear-gradient(#4f91c4,#245d8e);color:white;font-weight:bold;box-shadow:inset 0 1px rgba(255,255,255,.45),2px 2px 0 rgba(0,0,0,.18);cursor:pointer}
+.download:active{transform:translate(1px,1px);box-shadow:inset 0 1px rgba(0,0,0,.2)}
+.small{font-size:10px;color:#5a6269;line-height:1.45}
+.content{display:grid;grid-template-columns:245px 1fr;background:#dfe2e5}
+.sidebar{border-right:1px solid #929aa1;padding:9px;background:#d6dade}
+.panel{border:1px solid #8d969e;background:#f2f3f3;margin-bottom:9px;box-shadow:1px 1px 0 rgba(0,0,0,.1)}
+.panel h3{font-size:11px;margin:0;padding:5px 7px;background:linear-gradient(#edf0f2,#d2d7da);border-bottom:1px solid #a1a8ad}
+.panel ul{list-style:none;padding:5px 8px;margin:0}.panel li{padding:3px 0;line-height:1.25}.panel li b{color:#243f58}
+.main{padding:10px}
+.section{border:1px solid #8d969e;background:#f8f8f6;margin-bottom:10px;box-shadow:1px 1px 0 rgba(0,0,0,.1)}
+.section-head{background:linear-gradient(#edf0f2,#d5d9dc);border-bottom:1px solid #9ba3a9;padding:6px 8px;font-weight:bold;color:#20384d}
+.section-body{padding:10px;line-height:1.5}
+.section-body p{margin:0 0 9px}.section-body p:last-child{margin-bottom:0}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+ol,ul{margin-top:6px}.dense li{margin:4px 0}
+code{font-family:"Courier New",monospace;background:#e8eaeb;border:1px solid #c3c8cc;padding:1px 3px}
+table{width:100%;border-collapse:collapse;font-size:11px}th{background:#d8dde0;text-align:left}th,td{border:1px solid #aeb5ba;padding:5px 6px;vertical-align:top}.ok{color:var(--green);font-weight:bold}.warn{color:var(--amber);font-weight:bold}
+.badge{display:inline-block;padding:2px 5px;border:1px solid #89949c;background:#eef0f1;font-size:10px;margin-right:4px}
+.footer{border-top:1px solid #7f888f;background:#cfd4d8;padding:7px 9px;display:flex;justify-content:space-between;gap:10px;color:#46515a;font-size:10px}
+.status{color:#176331;font-weight:bold}
+@media(max-width:850px){.hero-grid,.cols{grid-template-columns:1fr}.content{grid-template-columns:1fr}.sidebar{border-right:0;border-bottom:1px solid #929aa1}.hero{padding:15px}.shell{width:calc(100% - 8px);margin:4px auto}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="titlebar">
+    <div class="brand"><div class="brandmark">V</div>VERITAS — Institutional Transaction &amp; Control Platform</div>
+    <div class="window-buttons"><span class="wb">_</span><span class="wb">□</span><span class="wb">×</span></div>
+  </div>
+  <div class="menubar"><span>File</span><span>Documentation</span><span>Deployment</span><span>Security</span><span>Operations</span><span>Support</span></div>
+  <div class="nav">
+    <a class="active" href="#overview">Overview</a><a href="#architecture">Architecture</a><a href="#installation">Installation</a><a href="#security">Security</a><a href="#network">Network</a><a href="#operations">Operations</a><a href="#recovery">Recovery</a>
+  </div>
+
+  <section class="hero">
+    <div class="hero-grid">
+      <div>
+        <div class="kicker">Institutional Deployment Documentation • Controlled Software Distribution</div>
+        <h1>VERITAS</h1>
+        <div class="subtitle"><b>Universal institutional transaction and control infrastructure.</b> A transaction-assurance platform designed to operate inside the operational, identity, network, payment, reconciliation, evidence, and governance boundaries of a financial institution.</div>
+        <div class="notice"><b>Deployment principle:</b> VERITAS is not positioned as an external banking interface. The platform is designed to become an institution-aware control layer over approved systems and payment capabilities while preserving explicit authority boundaries, separation of duties, execution controls, reconciliation integrity, and forensic evidence.</div>
+      </div>
+      <div class="downloadbox">
+        <h2>VERITAS ENTERPRISE DISTRIBUTION</h2>
+        <button class="download" onclick="fakeDownload()">↓ DOWNLOAD ENTERPRISE PACKAGE</button>
+        <p class="small"><b>Distribution state:</b> <span class="warn">PACKAGE PLACEHOLDER</span><br>
+        The deployment control is reserved for the institution-approved release artifact. This page does not transmit software, credentials, certificates, configuration secrets, or payment connectivity material.</p>
+        <p class="small"><b>Target environment:</b> controlled bank infrastructure<br><b>Release channel:</b> institutional / signed artifact<br><b>Execution model:</b> locally deployed</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="content">
+    <aside class="sidebar">
+      <div class="panel"><h3>DOCUMENT INDEX</h3><ul>
+        <li><b>01</b> Platform Overview</li><li><b>02</b> Architectural Model</li><li><b>03</b> Installation Procedure</li><li><b>04</b> Network &amp; Connectivity</li><li><b>05</b> Identity &amp; Authority</li><li><b>06</b> Payment Execution</li><li><b>07</b> Reconciliation</li><li><b>08</b> Evidence &amp; Audit</li><li><b>09</b> Operations</li><li><b>10</b> Recovery &amp; Continuity</li>
+      </ul></div>
+      <div class="panel"><h3>CONTROL STATE</h3><ul>
+        <li>Authority Fabric: <span class="status">DEFINED</span></li>
+        <li>Transaction Fabric: <span class="status">DEFINED</span></li>
+        <li>Execution Gate: <span class="status">FAIL-CLOSED</span></li>
+        <li>Evidence: <span class="status">REQUIRED</span></li>
+        <li>Reconciliation: <span class="status">SEPARATE</span></li>
+        <li>Autonomous Authorization: <span class="warn">PROHIBITED</span></li>
+      </ul></div>
+      <div class="panel"><h3>SUPPORTED CONCEPT</h3><ul>
+        <li><span class="badge">DOMESTIC</span> institutional transfers</li>
+        <li><span class="badge">INTERNATIONAL</span> cross-border payments</li>
+        <li><span class="badge">INTERNAL</span> book transfers</li>
+        <li><span class="badge">MULTI-RAIL</span> execution adapters</li>
+      </ul></div>
+    </aside>
+
+    <main class="main">
+      <section class="section" id="overview"><div class="section-head">01 — PLATFORM OVERVIEW</div><div class="section-body">
+        <p>VERITAS provides a common institutional transaction model across domestic, international, and internal payment activity. The transaction layer remains <b>rail-agnostic</b>; rail-specific protocol, connectivity, serialization, transmission, acknowledgement, and execution semantics are isolated behind controlled execution adapters.</p>
+        <p>The system is intended to support the complete controlled lifecycle: <b>Observe → Construct → Validate → Authorize → Prepare → Execute → Verify → Reconcile → Evidence → Investigate</b>. No single user interface action is treated as equivalent to settlement, and no acknowledgement is treated as proof of final financial state.</p>
+        <p>VERITAS is therefore a control and assurance plane rather than a branded replacement for a bank's existing core systems. Existing institutional systems remain authoritative for the records and capabilities they own; VERITAS establishes controlled orchestration, decision traceability, operational visibility, and evidence across those boundaries.</p>
+      </div></section>
+
+      <section class="section" id="architecture"><div class="section-head">02 — ARCHITECTURAL MODEL</div><div class="section-body">
+        <div class="cols">
+          <div><b>Institutional Reality</b><ul class="dense"><li>Institution, people, identity and authority</li><li>Network, compute, services and databases</li><li>Security fabric and external connectivity</li><li>Approved institutional system inventory</li></ul></div>
+          <div><b>Authority Fabric</b><ul class="dense"><li>Identity and role resolution</li><li>Capability registry and authority profiles</li><li>Policy evaluation</li><li>Privilege brokerage and separation of duties</li></ul></div>
+          <div><b>Transaction Fabric</b><ul class="dense"><li>Canonical transaction construction</li><li>Structural, semantic, reference and business validation</li><li>Versioned state machine</li><li>Workflow and orchestration</li></ul></div>
+          <div><b>Execution &amp; Message Fabric</b><ul class="dense"><li>MT / ISO 20022 and other representations</li><li>Serialization and integrity controls</li><li>Execution eligibility and consent</li><li>Rail-specific transmission adapters</li></ul></div>
+        </div>
+        <p><b>Invariant:</b> <code>Transmission ≠ Settlement</code>. <code>ACK ≠ Settlement</code>. A transaction may remain <code>UNKNOWN</code> when observed evidence is insufficient to establish final state. Historical evidence must not be rewritten merely to make expected and observed states agree.</p>
+      </div></section>
+
+      <section class="section" id="installation"><div class="section-head">03 — INSTALLATION PROCEDURE</div><div class="section-body">
+        <ol class="dense">
+          <li><b>Acquire the approved release.</b> Obtain the institution-approved VERITAS package through the controlled distribution channel. Verify release identity, signature, provenance, and integrity before execution. Do not install artifacts copied from unofficial locations.</li>
+          <li><b>Establish the deployment boundary.</b> Determine the target host, service identities, network zones, firewall paths, certificate stores, secrets-management boundary, database boundary, logging destination, backup destination, and operational ownership before starting installation.</li>
+          <li><b>Register institutional dependencies.</b> Configure only explicitly approved integrations. Dependencies may include IAM/Directory services, core banking systems, payment gateways, databases, message infrastructure, network services, monitoring systems, security tooling, treasury systems, AML/KYC services, SWIFT infrastructure, and domestic payment interfaces.</li>
+          <li><b>Initialize Authority Fabric.</b> Map institutional identities to capabilities and authority profiles. A role label alone must not be interpreted as permission to perform a financial action. Enforce least privilege, separation of duties, approval requirements, and contextual policy.</li>
+          <li><b>Initialize Transaction Fabric.</b> Establish canonical transaction schemas, validation rules, state transitions, reference data, workflow policies, and institution-specific constraints. Do not bind the canonical transaction model directly to one payment rail.</li>
+          <li><b>Enable execution adapters.</b> Activate only payment rails and execution paths that have passed connectivity, authorization, operational, and reconciliation validation. An adapter that can transmit must not automatically be considered eligible to transmit.</li>
+          <li><b>Activate evidence collection.</b> Confirm event capture, audit storage, transaction timeline construction, version history, integrity metadata, and forensic reconstruction before permitting production execution.</li>
+          <li><b>Perform controlled verification.</b> Execute non-production or institution-approved test transactions. Confirm maker/checker behavior, policy enforcement, message construction, execution gating, acknowledgements, reconciliation, failure handling, and evidence completeness.</li>
+          <li><b>Promote under change control.</b> Production enablement requires institutional authorization, documented configuration, release identification, rollback criteria, operational ownership, and an auditable promotion record.</li>
+        </ol>
+      </div></section>
+
+      <section class="section" id="security"><div class="section-head">04 — SECURITY, AUTHORITY &amp; EXECUTION CONTROL</div><div class="section-body">
+        <p>Financial execution is treated as a privileged operation. VERITAS must establish eligibility before an execution request can cross an external or internal payment boundary. Maker and Checker functions are distinct control stages rather than cosmetic UI roles.</p>
+        <table><tr><th>Control</th><th>Required property</th><th>Failure behavior</th></tr>
+        <tr><td>Identity</td><td>Authenticated institutional identity with authoritative source resolution</td><td>Deny</td></tr>
+        <tr><td>Capability</td><td>Explicit capability for the requested operation and resource</td><td>Deny</td></tr>
+        <tr><td>Separation of duties</td><td>Independent authorization where policy requires Maker/Checker separation</td><td>Hold</td></tr>
+        <tr><td>Transaction integrity</td><td>Version, amount, currency, beneficiary, parameters and policy context remain bound</td><td>Invalidate prior consent</td></tr>
+        <tr><td>Execution consent</td><td>Current authorization applies to the exact execution candidate</td><td>Lock execution</td></tr>
+        <tr><td>Evidence</td><td>Material execution events are recorded and reconstructable</td><td>Do not proceed</td></tr>
+        <tr><td>Reconciliation</td><td>Observed financial state independently compared with expected state</td><td>Exception / UNKNOWN</td></tr></table>
+        <p class="small"><b>Security boundary:</b> intelligence may explain, classify, summarize, detect anomalies, recommend actions, and surface operational dependencies. It must not silently acquire financial authority or convert a recommendation into execution permission.</p>
+      </div></section>
+
+      <section class="section" id="network"><div class="section-head">05 — NETWORK &amp; INSTITUTIONAL CONNECTIVITY</div><div class="section-body">
+        <p>VERITAS is designed to establish deep, governed awareness of the institution's technical environment. “Deep roots” means continuous understanding of approved dependencies and operational relationships—not unrestricted network access.</p>
+        <p>The institutional model should answer, continuously and evidentially: <b>What exists? What is connected? What is authorized? What normally happens? What is happening now? What changed? What should happen next?</b></p>
+        <p>Discovery and adaptation must remain bounded by explicit network zones, service identities, connector permissions, data-access policies, logging requirements, and change-control procedures. A newly discovered endpoint, service, route, account, database, or payment capability does not become trusted merely because VERITAS can observe it.</p>
+      </div></section>
+
+      <section class="section" id="operations"><div class="section-head">06 — OPERATIONS &amp; INSTITUTIONAL USE</div><div class="section-body">
+        <div class="cols">
+          <div><b>Maker Operations</b><p>Construct or import a transaction, inspect validation findings, resolve required references, review route selection, submit for authorization, and retain a complete transaction version history.</p></div>
+          <div><b>Checker Operations</b><p>Review the exact transaction candidate, authority context, policy result, validation state, supporting evidence, execution route, and material changes before granting consent.</p></div>
+          <div><b>Operations</b><p>Monitor queues, execution state, acknowledgements, exceptions, reconciliation discrepancies, infrastructure dependencies, and human handoff requirements.</p></div>
+          <div><b>Investigation</b><p>Reconstruct what was requested, by whom, under which authority, using which version, through which route, with which evidence, and what the institution subsequently observed.</p></div>
+        </div>
+        <p><b>Operational notification:</b> external collaboration channels may receive signed or integrity-protected notifications, but they are not the authoritative control plane. Financial state and authorization remain inside authenticated VERITAS workflows and authoritative institutional systems.</p>
+      </div></section>
+
+      <section class="section" id="recovery"><div class="section-head">07 — RECOVERY, CONTINUITY &amp; EVIDENCE</div><div class="section-body">
+        <p>VERITAS must be recoverable without manufacturing certainty. Recovery procedures preserve the distinction between known, failed, pending, rejected, cancelled, and unknown states. A service restart must not silently transform an unresolved execution into success.</p>
+        <ul class="dense">
+          <li>Persist transaction state transitions and material configuration versions.</li>
+          <li>Preserve execution requests, consent records, acknowledgements, responses, and reconciliation observations.</li>
+          <li>Maintain idempotency and replay controls across retried execution paths.</li>
+          <li>Preserve evidence required to reconstruct the transaction lifecycle after component failure.</li>
+          <li>Use explicit operational procedures for stale, duplicated, partially transmitted, or externally settled transactions.</li>
+          <li>Test restoration and reconciliation rather than treating backup completion as proof of recoverability.</li>
+        </ul>
+      </div></section>
+
+      <section class="section"><div class="section-head">08 — PAYMENT RAIL MODEL</div><div class="section-body">
+        <table><tr><th>Layer</th><th>Responsibility</th><th>Rail dependence</th></tr>
+        <tr><td>Canonical Transaction</td><td>Business intent, parties, amount, currency, purpose, constraints and authority context</td><td><span class="ok">None</span></td></tr>
+        <tr><td>Validation</td><td>Structural, semantic, reference and business validation</td><td>Controlled by policy / adapter requirements</td></tr>
+        <tr><td>Message Fabric</td><td>Representation, transformation, serialization and integrity</td><td>Adapter/profile specific</td></tr>
+        <tr><td>Execution Fabric</td><td>Eligibility, consent, transmission, acknowledgement and verification</td><td><b>Yes</b></td></tr>
+        <tr><td>Reconciliation</td><td>Expected vs observed financial state</td><td>Evidence source dependent</td></tr>
+        </table>
+        <p class="small">A first institutional deployment may expose domestic and international capabilities such as internal transfer, UPI, IMPS, NEFT, RTGS, SWIFT, correspondent banking, or other approved rails. These names describe adapters available to an institution; they do not define the identity of the platform.</p>
+      </div></section>
+
+      <section class="section"><div class="section-head">09 — RELEASE &amp; CHANGE CONTROL</div><div class="section-body">
+        <p>Every production release should be attributable to a specific artifact, source revision, configuration set, migration set, dependency set, and approval record. Configuration changes affecting authority, payment routing, execution eligibility, reconciliation, evidence, or security boundaries must be treated as controlled changes.</p>
+        <p><b>Evidence over inference.</b> If the system cannot prove that a condition is satisfied, the condition remains unsatisfied for purposes of a fail-closed control. Operational convenience must not override an unresolved security, authority, integrity, or execution condition.</p>
+      </div></section>
+    </main>
+  </div>
+
+  <div class="footer">
+    <span>VERITAS Institutional Distribution Portal</span>
+    <span>Documentation baseline • <b>Controlled Deployment</b> • <span class="status">READY FOR PACKAGE INTEGRATION</span></span>
+  </div>
+</div>
+<script>
+function fakeDownload(){
+  const b=document.querySelector('.download');
+  const old=b.textContent;
+  b.textContent='✓ PACKAGE REQUEST REGISTERED';
+  setTimeout(()=>b.textContent='↓ DOWNLOAD ENTERPRISE PACKAGE',1400);
+}
+</script>
+</body>
+</html>
